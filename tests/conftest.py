@@ -294,11 +294,14 @@ class SnippetCompilationTest(object):
         cls.libs = tempfile.mkdtemp()
         cls.env = tempfile.mkdtemp()
         config.Config.load_config()
+        cls.cwd = os.getcwd()
 
     @classmethod
     def tearDownClass(cls):
         shutil.rmtree(cls.libs)
         shutil.rmtree(cls.env)
+        # reset cwd
+        os.chdir(cls.cwd)
 
     def setup_for_snippet(self, snippet, autostd=True):
         # init project
